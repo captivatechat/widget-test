@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Widget ID Check</title>
+    <script src="https://widget.prod.captivat.io/captivate.min.js"></script>
+</head>
+
+<body>
+    <h1>Widget ID Check: Production</h1>
+    <h2 id="captivate_id_run"></h2>
+    <h2 id="captivate_id_status"></h2>
+    <script>
+        function runWidget(){
+            var captivate_id = document.getElementById("captivate_id").value;
+            
+            if (document.contains(document.getElementById("captivate-widget"))) {
+                document.getElementById("captivate-widget").remove();
+            }
+            
+            Captivate.init({   
+                apiKey: captivate_id,
+             });
+            Captivate.onConnect(() => {
+                console.log("test", Captivate.isConnected);
+            });
+            document.getElementById("captivate_id_run").innerHTML = "Running ID: " + captivate_id;
+        }
+    </script>
+    <form onsubmit="return false">
+      <label for="captivate_id">Widget ID:</label>
+      <input type="text" id="captivate_id" name="captivate_id"><br><br>
+      <input type="submit" value="Submit" onclick="runWidget()">
+    </form>
+    <script>
+        var url = new URL(window.location.href);
+        if (url.searchParams.get("api")) {
+        var api_value=url.searchParams.get("api");
+            document.getElementById("captivate_id").value = api_value;
+            runWidget();
+        }
+   </script>
+</body>
+<html>
