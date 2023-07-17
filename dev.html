@@ -24,6 +24,7 @@
 		}
 	</style>
     <script src="https://widget.dev.captivat.io/captivate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
 </head>
 <body>
 	<div class="box">
@@ -46,7 +47,7 @@
                 Captivate.onConnect(() => {
                     console.log("test", Captivate.isConnected);
                 });
-                document.getElementById("captivate_id_run").innerHTML = "API KEY: " + captivate_id;
+                document.getElementById("captivate_id_run").innerHTML = "API KEY: " + DOMPurify.sanitize(captivate_id);
             }
         </script>
         <form onsubmit="return false">
@@ -59,7 +60,7 @@
         var url = new URL(window.location.href);
         if (url.searchParams.get("api")) {
         var api_value=url.searchParams.get("api");
-            document.getElementById("captivate_id").value = api_value;
+            document.getElementById("captivate_id").value = DOMPurify.sanitize(api_value);
             runWidget();
         }
    </script>
