@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>CH Socket Demo</title>
+  </head>
+  <body>
+    <h1>Choose an action.</h1>
+    <input type="text" id="wssurl" name="wssurl" placeholder="WSS URl" size="53" >
+    <button id="wsButton" type="button" title="Open WebSocket connection">
+      Open Socket connection
+    </button>
+    <br>
+    <br>
+    <textarea id="json" name="w3review" rows="4" cols="50"></textarea>
+    <br>
+
+    <button id="wsSendButton" type="button" title="Send Message">
+      Send Message
+    </button>
+    <br>
+    <pre id="messages" style="height: 400px; width: 800px; overflow: scroll; word-wrap: break-word; white-space: pre-wrap;
+"></pre>
+
+<pre>
+Socket Conversation Testing
+
+1. Client Action : connect to websocket.
+   Input your websocket url, this should include the apikey, then click Open Socket Connection. Make sure your websocket url has your custom channel API key as a query parameter. 
+
+   Example:
+   wss://socketserver.com?apiKey=yourAPIKey
+
+2. If successful, expect to receive a socket_connected event.
+
+3. Client Action : request for a conversation_id using conversation_start event, userId is required for this.
+example:
+{
+    "action": "sendMessage",
+    "event": {
+        "event_type": "conversation_start",
+        "event_payload": {
+            "userId": "super-unique-user-id",
+            "userBasicInfo": {
+                "firstName": "John",
+                "lastName": "Doe",
+                "email": "john@sample.io"
+            },
+            "userData": {}
+        }
+    }
+}
+
+4. If successful, expect to receive a conversation_start_success event that has the conversation_id in the payload.
+
+5. Client Action: Use the conversation_id to send a user_message.
+{
+    "action": "sendMessage",
+    "event": {
+        "event_type": "user_message",
+        "event_payload": {
+            "type": "message_create",
+            "client_msg_id": "unique-message-id",
+            "conversation_id": "6f61b997-6e2c-471e-8481-27a584c5dcdc",
+            "content": {
+                "text": "hello"
+            }
+        }
+    }
+}
+
+6. Expect to receive a bot reply. 
+
+7. Client Action: Use the conversation_id to send metadata.
+{
+    "action": "sendMessage",
+    "event": {
+        "event_type": "metadata",
+        "event_payload": {
+            "metadata": {
+                "sample_metadata": "oh yeah"
+            },
+            "client_msg_id": "unique-message-id",
+            "conversation_id": "6f61b997-6e2c-471e-8481-27a584c5dcdc"
+        }
+    }
+}
+
+8. For now, expect for a bot reply but this depends on the chatbot developer.
+
+9. Client Action: Use the conversation_id to send an action.
+{
+    "action": "sendMessage",
+    "event": {
+        "event_type": "action",
+        "event_payload": {
+            "type": "normal",
+            "id": "customAction",
+            "data": {},
+            "conversation_id": "6f61b997-6e2c-471e-8481-27a584c5dcdc"
+        }
+    }
+}
+
+10. For now, expect for a bot reply but this depends on the chatbot developer.
+
+11. Client Action: Test conversation_transcript_request socket event
+
+{
+    "action": "sendMessage",
+    "event": {
+        "event_type": "conversation_transcript_request",
+        "event_payload": {
+            "conversation_id": "6f61b997-6e2c-471e-8481-27a584c5dcdc"
+        }
+    }
+}
+
+
+</pre>
+    <script type= "text/javascript" src="sockets.js"></script>
+  </body>
+</html>
