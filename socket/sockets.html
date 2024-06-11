@@ -31,6 +31,9 @@ Socket Conversation Testing
    Example:
    wss://socketserver.com?apiKey=yourAPIKey
 
+   For Production use wss://channel.wss.captivatechat.ai/dev?apiKey=API_KEY
+   For Development use wss://channel-dev.wss.captivatechat.ai/dev?apiKey=API_KEY
+
 2. If successful, expect to receive a socket_connected event.
 
 3. Client Action : request for a conversation_id using conversation_start event, userId is required for this.
