@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Captivate Chat Widget Tester - Development</title>
+	<title>Captivate Chat Widget Preview - Development</title>
 	<style>
 		body {
             background: url('img/background.png') no-repeat center center fixed; 
@@ -29,8 +29,8 @@
 <body>
 	<div class="box">
 		<!-- Content goes here -->
-        <h1>Widget Tester (Development)</h1>
-        <p>To test your widget, please put your Widget API Key to generate the widget on bottom-right of this page.</p>
+        <h1>Captivate Chat - Widget Preview</h1>
+        <p>This pagee displays your widget on the bottom-right of this page.</p>
         <p id="captivate_id_run"></p>
         <p id="captivate_id_status"></p>
         <script>
@@ -50,7 +50,7 @@
                 document.getElementById("captivate_id_run").innerHTML = "API KEY: " + DOMPurify.sanitize(captivate_id);
             }
         </script>
-        <form onsubmit="return false">
+        <form onsubmit="return false" hidden>
           <label for="captivate_id">Widget API Key:</label>
           <input type="text" id="captivate_id" name="captivate_id"><br><br>
           <input type="submit" value="Submit" onclick="runWidget()">
