@@ -1,43 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <title>CH Socket Demo</title>
-  </head>
-  <body>
-    <h1>Choose an action.</h1>
-    <input type="text" id="wssurl" name="wssurl" placeholder="WSS URl" size="53" >
-    <button id="wsButton" type="button" title="Open WebSocket connection">
-      Open Socket connection
-    </button>
-    <br>
-    <br>
-    <textarea id="json" name="w3review" rows="4" cols="50"></textarea>
-    <br>
 
-    <button id="wsSendButton" type="button" title="Send Message">
-      Send Message
-    </button>
-    <br>
-    <pre id="messages" style="height: 400px; width: 800px; overflow: scroll; word-wrap: break-word; white-space: pre-wrap;
-"></pre>
+<head>
+    <meta charset="utf-8">
+    <title>Captivate Chat - Socket Tester</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-<pre>
-Socket Conversation Testing
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Socket Conversation Testing</h2>
 
-1. Client Action : connect to websocket.
-   Input your websocket url, this should include the apikey, then click Open Socket Connection. Make sure your websocket url has your custom channel API key as a query parameter. 
-
-   Example:
-   wss://socketserver.com?apiKey=yourAPIKey
-
-   For Production use wss://channel.wss.captivatechat.ai/dev?apiKey=API_KEY
-   For Development use wss://channel-dev.wss.captivatechat.ai/dev?apiKey=API_KEY
-
-2. If successful, expect to receive a socket_connected event.
-
-3. Client Action : request for a conversation_id using conversation_start event, userId is required for this.
-example:
+                <p>Sigrid Nicole Ramos &lt;sigrid@captivatechat.com&gt;<br>
+                    Eduardo Villena  &lt;ebvjr@captivatechat.com&gt;</p>
+                <ol>
+                    <li>Client Action: Connect to WebSocket. Input your WebSocket URL, which should include the API key, then click "Open Socket Connection".
+                        <br><br>
+                        Ensure your WebSocket URL includes your custom channel API key as a query parameter.
+                        <br>
+                        <pre>
+For Production use wss://channel.wss.captivatechat.ai/dev?apiKey=API_KEY
+For Development use wss://channel-dev.wss.captivatechat.ai/dev?apiKey=API_KEY
+                        </pre>
+                    
+                    </li>
+                    <li>If successful, expect to receive a socket_connected event.</li>
+                    <li>Client Action: Request a conversation_id using conversation_start event; userId is required for this.
+                        <pre>
 {
     "action": "sendMessage",
     "event": {
@@ -53,10 +44,11 @@ example:
         }
     }
 }
-
-4. If successful, expect to receive a conversation_start_success event that has the conversation_id in the payload.
-
-5. Client Action: Use the conversation_id to send a user_message.
+                        </pre>
+                    </li>
+                    <li>If successful, expect to receive a conversation_start_success event that has the conversation_id in the payload.</li>
+                    <li>Client Action: Use the conversation_id to send a user_message.
+                        <pre>
 {
     "action": "sendMessage",
     "event": {
@@ -71,10 +63,11 @@ example:
         }
     }
 }
-
-6. Expect to receive a bot reply. 
-
-7. Client Action: Use the conversation_id to send metadata.
+                        </pre>
+                    </li>
+                    <li>Expect to receive a bot reply.</li>
+                    <li>Client Action: Use the conversation_id to send metadata.
+                        <pre>
 {
     "action": "sendMessage",
     "event": {
@@ -88,10 +81,11 @@ example:
         }
     }
 }
-
-8. For now, expect for a bot reply but this depends on the chatbot developer.
-
-9. Client Action: Use the conversation_id to send an action.
+                        </pre>
+                    </li>
+                    <li>For now, expect a bot reply, but this depends on the chatbot developer.</li>
+                    <li>Client Action: Use the conversation_id to send an action.
+                        <pre>
 {
     "action": "sendMessage",
     "event": {
@@ -104,11 +98,11 @@ example:
         }
     }
 }
-
-10. For now, expect for a bot reply but this depends on the chatbot developer.
-
-11. Client Action: Test conversation_transcript_request socket event
-
+                        </pre>
+                    </li>
+                    <li>For now, expect a bot reply, but this depends on the chatbot developer.</li>
+                    <li>Client Action: Test conversation_transcript_request socket event.
+                        <pre>
 {
     "action": "sendMessage",
     "event": {
@@ -118,9 +112,35 @@ example:
         }
     }
 }
+                        </pre>
+                    </li>
+                </ol>
+            </div>
 
+            <div class="col-md-6">
+                <h1 class="mb-4">Choose an Action</h1>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="wssurl" name="wssurl" placeholder="WSS URL">
+                </div>
+                <button id="wsButton" type="button" class="btn btn-primary mb-3" title="Open WebSocket connection">Open Socket Connection</button>
 
-</pre>
-    <script type= "text/javascript" src="sockets.js"></script>
-  </body>
+                <div class="form-group">
+                    <textarea class="form-control" id="json" name="w3review" rows="4" placeholder="Enter your JSON here..."></textarea>
+                </div>
+                <button id="wsSendButton" type="button" class="btn btn-success mb-3" title="Send Message">Send Message</button>
+
+                <div class="card">
+                    <div class="card-body">
+                        <pre id="messages" style="height: 400px; overflow: scroll; word-wrap: break-word; white-space: pre-wrap;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="sockets.js"></script>
+</body>
 </html>
