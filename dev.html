@@ -5,64 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Captivate Chat - Widget Preview</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./styles/nav.css">
+    <link rel="stylesheet" href="./styles/modal.css">
+    <link rel="stylesheet" href="./styles/banner.css">
     <script src="https://widget.dev.captivat.io/captivate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
 </head>
-<body>
-    <div class="gear-icon" onclick="openModal()"> <img src="img/loading.gif" width="25px" height="25px" alt="Settings"></div>
+<body>  
+   <nav class="nav" aria-label="Primary Navigation">
+        <div class="nav__container">
+            <div class="nav__title-wrapper">
+                <a href="https://devapp.captivatechat.ai/chat-flows" class="nav__back-link" aria-label="Go back to chat flows">
+                    <img src="img/left-arrow.png" alt="Back" class="nav__back-icon" height="12px" />
+                </a>
+                <h2 class="nav__title">Go back to Chat Flow</h2>
+            </div>
+            <img src="img/captivate-logo.png" alt="Captivate Chat Logo" class="nav__logo" />
+            <button type="button" class="nav__button" onclick="openModal()" aria-label="Open page settings">
+                <p class="nav__button-text">Page Settings</p>
+                <img src="img/settings.png" alt="Settings" class="nav__button-icon" width="24px" height="24px" />
+            </button>
+        </div>
+    </nav>  
+    
+    <div class="background-container" role="img" aria-label="Background for the Captivate Chat widget preview"></div>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Share</h2>
-            <div>
-                <label for="shareURL">Share URL:</label>
-                <input type="text" id="shareURL" readonly>
-                <button id="copyButton" onclick="copyURL()">Copy</button>
-            </div>
-            <h2>API Key</h2>
-            <div>
-                <div id="apikey"></div>
-            </div>
-            <h2>Background</h2>
-            <div>
-                <span>Background Asset: <span id="bgAsset"></span></span> <br><br>
-                <label for="bgType">Select Background Type:</label>
-                <input type="radio" id="web" name="bgType" value="web" onclick="toggleInput()">
-                <label for="web">Web</label>
-                <input type="radio" id="image" name="bgType" value="image" onclick="toggleInput()">
-                <label for="image">Image</label>
-            </div>
-            <br>
-            <div id="webInput" class="hidden">
-                <label for="webURL">Enter Website URL:</label>
-                <input type="text" id="webURL" placeholder="https://www.captivatechat.com">
-            </div>
-            <div id="imageInput" class="hidden">
-                <label for="imageFile">Upload Image (1980x1080):</label>
-                <input type="file" id="imageFile">
-            </div>
-            <div id="welcome-banner">
-                <label for="welcomeBanner">Hide Welcome Banner (Centerbox):</label>
-                <input type="checkbox" id="welcomeBanner">
-            </div>
-            <br>
-            <button onclick="applyBackground()"><h2>Apply</h2></button>
-            <br>
-            <br>
-            <div id="status"></div>
-            </div>
-    </div>
-
-    <div id="box" class="box">
-        <h1>Captivate Chat - Widget Preview</h1>
-        <p>This page displays your widget on the bottom-right of this page. to configure this page click 
+    <div id="banner" class="banner" aria-label="Welcome Banner">
+        <h1 class="banner__title" aria-label="Captivate Chat - Widget Preview">Captivate Chat - Widget Preview</h1>
+        <p class="banner__description" aria-label="Description of the welcome banner">This page displays your widget on the bottom-right of this page. to configure this page click 
             the rotating loading icon on top right corner of this page.<br><br>
             You can change the background image and hide this welcome banner. <br>
             You can also share the URL with your team members to preview the widget.<br><br>
-            Using custom socket? please go to <a href="socket/sockets.html">Sockets Tester</a>.
+            Using custom socket? please go to <a href="socket/sockets.html" aria-label="Sockets Tester">Sockets Tester</a>.
         </p>
 	</div>
+
+    <div id="modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">Page Settings</h2>
+                <button type="button" class="modal__close-button" aria-label="Close modal" onclick="closeModal()">
+                    <img src="img/close-circle.svg" width="24px" height="24px" alt="Close">
+                </button>
+            </div>
+
+            <div class="modal__body">
+                <div class="modal__share-page-url">
+                    <label for="shareURL" class="modal__label">Share Page URL</label>
+                    <input type="text" id="shareURL" name="shareURL" class="modal__input" readonly>
+                </div>   
+                <div class="modal__api-key">
+                    <h2 class="modal__sub-title">API Key</h2>
+                    <div id="apikey" class="modal__apikey-value"></div>
+                </div>
+                <div class="modal__background">
+                    <div class="modal__background-type">
+                        <span id="bgAsset"></span>
+                        <label for="bgType" class="modal__label">Background Type</label>
+                        <div class="modal__background-type-radio">
+                            <div>
+                                <input type="radio" id="web" name="bgType" value="web" class="modal__radio" onclick="toggleInput()">
+                                <label for="web" class="modal__radio-label">Web</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="image" name="bgType" value="image" class="modal__radio" onclick="toggleInput()">
+                                <label for="image" class="modal__radio-label">Image</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="webInput" class="hidden modal__background-url">
+                        <label for="webURL" class="modal__label">Enter Website URL</label>
+                        <input type="text" id="webURL" name="webURL" class="modal__input" placeholder="https://www.captivatechat.com">
+                    </div>
+                    <div id="imageInput" class="hidden modal__background-image">
+                        <span class="modal__image-upload-title">Upload Image (1980x1080)</span>
+                        <div class="modal__background-image-upload">
+                            <label for="imageFile" class="modal__upload-label">
+                                <button type="button" class="modal__upload-button"  onclick="document.getElementById('imageFile').click();">
+                                    <img src="/img/upload.svg" width="16px" height="16px" alt="Upload">
+                                    <p class="modal__upload-text">Upload</p>
+                                </button>
+                                <input type="file" id="imageFile" name="imageFile" class="hidden"  onchange="displayImage(event)">             
+                            </label>
+                            <div class="modal__image-preview-container">
+                                <div class="modal__image-preview-wrapper">
+                                    <img id="previewImage" src="" alt="Selected Image" class="modal__image-preview hidden" />                
+                                    <span id="filenameDisplay" class="modal__filename hidden"></span>
+                                </div>
+                                <button type="button" id="removeImageButton" class="modal__remove-button hidden" onclick="removeImage()">
+                                    <img src="/img/icon-delete.svg" width="16px" height="16px" alt="Remove">
+                                </button>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+    
+                <div class="modal__welcome-banner" id="welcome-banner">
+                    <label for="welcomeBanner" class="modal__label">Hide Welcome Banner</label>
+                    <label class="modal__switch">
+                        <input type="checkbox" id="welcomeBanner" name="welcomeBanner" class="modal__switch-input">
+                        <span class="modal__slider"></span>
+                    </label>
+                </div>
+            </div>
+    
+            <div class="modal__footer">
+                <button onclick="closeModal()" class="modal__button modal__button--cancel">Cancel</button>
+                <button onclick="applyBackground()" class="modal__button modal__button--apply">Apply</button>
+            </div>
+       
+            <div id="status"></div>
+        </div>
+    </div>
 
     <script src="scripts.js"></script>
 </body>
