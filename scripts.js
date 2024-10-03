@@ -1,22 +1,75 @@
 function openModal() {
     document.getElementById("modal").style.display = "block";
+    modal.classList.add("show");
 }
 
 function closeModal() {
     document.getElementById("modal").style.display = "none";
+    modal.classList.remove("show");
 }
 
 function toggleInput() {
     const webInput = document.getElementById("webInput");
     const imageInput = document.getElementById("imageInput");
     const webRadio = document.getElementById("web");
+
     if (webRadio.checked) {
-        webInput.classList.remove("hidden");
-        imageInput.classList.add("hidden");
+        webInput.classList.add("flex");
+        imageInput.classList.remove("flex");
     } else {
-        imageInput.classList.remove("hidden");
-        webInput.classList.add("hidden");
+        imageInput.classList.add("flex");
+        webInput.classList.remove("flex");
     }
+}
+
+function displayImage(event) {
+    const file = event.target.files[0]; 
+    const previewImage = document.getElementById('previewImage'); 
+    const filenameDisplay = document.getElementById('filenameDisplay'); 
+    const removeImageButton = document.getElementById('removeImageButton'); 
+
+    if (file) {
+        const reader = new FileReader(); 
+
+        reader.onload = function (e) {
+            previewImage.src = e.target.result; 
+            previewImage.classList.remove('hidden'); 
+        };
+
+        reader.readAsDataURL(file); 
+
+        filenameDisplay.textContent = file.name; 
+        filenameDisplay.classList.remove('hidden');
+        removeImageButton.classList.remove('hidden');
+    } else {
+        previewImage.src = '';
+        previewImage.classList.add('hidden'); 
+        filenameDisplay.textContent = ''; 
+        filenameDisplay.classList.add('hidden');
+        removeImageButton.classList.add('hidden');
+    }
+}
+
+function removeImage() {
+    const previewImage = document.getElementById('previewImage'); 
+    const filenameDisplay = document.getElementById('filenameDisplay');
+    const removeImageButton = document.getElementById('removeImageButton'); 
+    const imageFileInput = document.getElementById('imageFile'); 
+
+    previewImage.src = ''; 
+    previewImage.classList.add('hidden');
+    filenameDisplay.textContent = ''; 
+    filenameDisplay.classList.add('hidden');
+    removeImageButton.classList.add('hidden'); 
+    imageFileInput.value = '';
+}
+
+function copyURL() {
+    var copyText = document.getElementById("shareURL");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    document.getElementById("copyButton").innerHTML = "Copied!";
 }
 
 async function applyBackground() {
@@ -29,9 +82,9 @@ async function applyBackground() {
     if (document.getElementById("welcomeBanner").checked) {
        
         replaceUrl.searchParams.set("hwb", true);
-        document.getElementById("box").style.display = "none";
+        document.getElementById("banner").style.display = "none";
     } else {
-        document.getElementById("box").style.display = "block";
+        document.getElementById("banner").style.display = "block";
         replaceUrl.searchParams.set("hwb", false);
     }
 
@@ -87,6 +140,7 @@ async function applyBackground() {
 
 function runWidget(){
     var captivate_id = DOMPurify.sanitize(document.getElementById("apikey").innerHTML);
+
     if (document.contains(document.getElementById("captivate-widget"))) {
         document.getElementById("captivate-widget").remove();
     }
@@ -98,13 +152,6 @@ function runWidget(){
     });
 }
 
-function copyURL() {
-    var copyText = document.getElementById("shareURL");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    document.execCommand("copy");
-    document.getElementById("copyButton").innerHTML = "Copied!";
-}
 
 function init() {
     var url = new URL(window.location.href);
@@ -112,6 +159,7 @@ function init() {
     if (url.searchParams.get("api")) {
         var apiValue = url.searchParams.get("api");
         document.getElementById("apikey").innerHTML = DOMPurify.sanitize(apiValue);
+        
     }
     if (url.searchParams.get("asset")) {
         var assetValue=url.searchParams.get("asset");
@@ -122,12 +170,14 @@ function init() {
         var hwbValue = url.searchParams.get("hwb");
         if (hwbValue === "true") {
             document.getElementById("welcomeBanner").checked = true;
-            document.getElementById("box").style.display = "none";
+            document.getElementById("banner").style.display = "none";
         } else {
             document.getElementById("welcomeBanner").checked = false;
-            document.getElementById("box").style.display = "block";
+            document.getElementById("banner").style.display = "block";
         }
     }
+
+
     runWidget();
 }
 

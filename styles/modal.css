@@ -1,0 +1,359 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  display: block;
+  opacity: 1;
+}
+
+.modal__content {
+  width: 80%;
+  max-width: 500px;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 8px;
+  box-shadow: -2px 2px 15px -1px #7171711f;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: slide-in 0.3s ease forwards;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__title {
+  font-weight: 500;
+  color: #444;
+  font-size: 20px;
+}
+
+.modal__close-button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.modal__close-button:hover {
+  transform: scale(1.05);
+}
+
+.modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal__share-page-url,
+.modal__api-key,
+.modal__welcome-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal__background {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal__label {
+  font-family: "Montserrat", "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #000;
+}
+
+.modal__input {
+  height: 44px;
+  width: 100%;
+  border-radius: 4px;
+  background-color: #f7f9fa;
+  border: 1px solid #d0d5dd;
+  box-shadow: 0px 1px 2px 0px #1018280d;
+  padding: 0 10px;
+}
+
+.modal__sub-title {
+  font-family: "Montserrat", "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #000;
+}
+
+.modal__apikey-value {
+  height: 44px;
+  width: 100%;
+  border-radius: 4px;
+  background-color: #f7f9fa;
+  border: 1px solid #d0d5dd;
+  box-shadow: 0px 1px 2px 0px #1018280d;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.modal__background-type {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal__background-type-radio {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.modal__background-url,
+.modal__background-image {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal__background-image-upload {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+  height: 44px;
+  padding: 5px;
+  background-color: #f7f9fa;
+  border: 1px solid #d0d5dd;
+  box-shadow: 0px 1px 2px 0px #1018280d;
+}
+
+.modal__upload-button {
+  height: 30px;
+  width: 84px;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  padding: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.modal__upload-button:active {
+  transform: scale(0.95);
+  background-color: darken(var(--primary-color), 20%);
+}
+
+.modal__image-preview-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  padding: 0 5px;
+}
+
+.modal__image-preview-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 30px;
+}
+
+.modal__image-preview {
+  height: 20px;
+  width: 40px;
+}
+
+.modal__filename {
+  font-size: 14px;
+  color: #0d6efd;
+  font-family: "Montserrat", "Inter", sans-serif;
+}
+
+.modal__remove-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.modal__remove-button:active {
+  transform: scale(0.95);
+}
+
+.modal__switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 22px;
+}
+
+.modal__switch-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.modal__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.modal__slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+.modal__switch-input:checked + .modal__slider {
+  background-color: #2196f3;
+}
+
+.modal__switch-input:focus + .modal__slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+.modal__switch-input:checked + .modal__slider::before {
+  transform: translateX(22px);
+}
+
+.modal__slider {
+  border-radius: 34px;
+}
+
+.modal__slider::before {
+  border-radius: 50%;
+}
+
+.modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal__button {
+  font-family: "Montserrat", "Inter", sans-serif;
+  height: 46px;
+  width: 88px;
+  font-weight: 500;
+  border-radius: 4px;
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal__button:hover {
+  transform: scale(1.05);
+}
+
+.modal__button--cancel {
+  background-color: #fff;
+  color: var(--primary-color);
+}
+
+.modal__button--apply {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translate(-50%, -60%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal__content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .modal__title {
+    font-size: 18px;
+  }
+
+  .modal__label {
+    font-size: 14px;
+  }
+
+  .modal__input,
+  .modal__apikey-value {
+    height: 40px;
+  }
+
+  .modal__button {
+    height: 40px;
+    width: 80px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal__content {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .modal__title {
+    font-size: 16px;
+  }
+
+  .modal__label {
+    font-size: 12px;
+  }
+
+  .modal__input,
+  .modal__apikey-value {
+    height: 36px;
+  }
+
+  .modal__button {
+    height: 36px;
+    width: 70px;
+    font-size: 12px;
+  }
+}
