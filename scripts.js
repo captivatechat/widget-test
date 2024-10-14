@@ -108,7 +108,9 @@ async function applyBackground() {
         replaceUrl.searchParams.set("asset", filename);
         document.getElementById("bgAsset").value = filename;
         document.body.style.backgroundImage = `url(${url})`;
-        document.getElementsByClassName("background-container").remove();   
+        document.getElementsByClassName("background-container")[0].remove();
+        document.getElementsByClassName("nav")[0].remove();
+        document.getElementById("banner").style.display = "none";   
     }
 
     if (imageRadio.checked) {
