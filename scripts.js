@@ -180,8 +180,11 @@ function init() {
         }
     }
 
+    document.getElementById("banner").style.display = "none";
+
 
     runWidget();
+}
 }
 
 init();
