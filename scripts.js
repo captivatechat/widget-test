@@ -107,7 +107,8 @@ async function applyBackground() {
         const filename = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
         replaceUrl.searchParams.set("asset", filename);
         document.getElementById("bgAsset").value = filename;
-        document.body.style.backgroundImage = `url(${url})`;        
+        document.body.style.backgroundImage = `url(${url})`;
+        document.getElementsByClassName("background-container").remove();   
     }
 
     if (imageRadio.checked) {
@@ -165,7 +166,9 @@ function init() {
         var assetValue=url.searchParams.get("asset");
         document.getElementById("bgAsset").value = DOMPurify.sanitize(assetValue);
         document.body.style.backgroundImage = `url("https://widget-preview-assets.do.captivatechat.ai/img/${assetValue}.jpg")`;
-    }
+        document.getElementsByClassName("background-container")[0].remove();
+        document.getElementsByClassName("nav")[0].remove();
+
     if (url.searchParams.get("hwb")) {
         var hwbValue = url.searchParams.get("hwb");
         if (hwbValue === "true") {
