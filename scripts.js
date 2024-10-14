@@ -194,6 +194,8 @@ function init() {
       }
     }
   }
+  // temp
+  document.getElementById("banner").style.display = "none";
   runWidget();
 }
 
